@@ -1,11 +1,13 @@
-#!/bin/bash
+@echo off
 
-cd "$(dirname "$0")"
+cd %~dp0
 
 git clone https://github.com/JoseMLG0/CoppelTest-Back-End.git CoppelTest-Back-End
 git clone https://github.com/JoseMLG0/CoppelTest-Database.git CoppelTest-Database
 git clone https://github.com/JoseMLG0/CoppelTest-Front-End.git CoppelTest-Front-End
 
-docker-compose build
+cd CoppelTest-Back-End
+gradlew build
+cd ..
 
-docker-compose up
+docker-compose build

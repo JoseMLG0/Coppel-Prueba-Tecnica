@@ -16,12 +16,12 @@ Este proyecto contiene múltiples servicios que se despliegan utilizando Docker 
    ```
 2. Cambia al directorio principal del proyecto
 
-3. Ejecuta el archivo de script build-and-run.bat (Windows) o build-and-run.sh (Linux/Mac) para clonar cada repositorio correspondiente, construirlos y ejecutarlos.
+3. Ejecuta el archivo de script get-and-build.bat (Windows) o get-and-build.sh (Linux/Mac) para clonar cada repositorio correspondiente y construirlos.
 
    ```sh
-    build-and-run.bat  # en Windows
+    get-and-build.bat  # en Windows
     # o
-    ./build-and-run.sh  # en Linux/Mac
+    ./get-and-build.sh  # en Linux/Mac
    ```
    
 4. Los servicios se desplegarán y estarán disponibles en los puertos configurados.
@@ -34,6 +34,7 @@ Este proyecto contiene múltiples servicios que se despliegan utilizando Docker 
 
 
 # Notas
+- Para realizar la construccion de los archivos es necesario que se tenga instalado el JDK 17 de Java.
 - Asegúrate de que los puertos utilizados por los servicios en docker-compose.yml no estén en uso en tu máquina.
 - Puedes personalizar las configuraciones y los datos en los archivos de los servicios según tus necesidades.
 
