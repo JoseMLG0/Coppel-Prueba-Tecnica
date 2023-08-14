@@ -1,0 +1,57 @@
+version: '3'
+
+services:
+  coppelfrontend:
+    container_name: coppel-test-frontend
+    restart: always
+    build: ./CoppelTest-Front-End
+    depends_on:
+      - coppelbackend
+    ports:
+      - "80:80"
+    environment:
+      COPPEL_TEST_BACKEND_PROTOCOL: http
+      COPPEL_TEST_BACKEND_HOST: localhost
+      COPPEL_TEST_BACKEND_PORT: 8080
+    networks:
+      - frontendNetwork
+
+  coppelbackend:
+    container_name: coppel-test-backend
+    restart: always
+    build: ./CoppelTest-Back-End
+    ports:
+      - 8080:8080
+    depends_on:
+      - coppeldatabase
+    links:
+      - coppeldatabase
+    environment:
+      COPPEL_TEST_MYSQL_HOST: coppeldatabase
+      COPPEL_TEST_MYSQL_PORT: 3306
+      COPPEL_TEST_MYSQL_DB: coppeltest
+      COPPEL_TEST_MYSQL_USERNAME: root
+      COPPEL_TEST_MYSQL_PASSWORD: ''
+    networks:
+      - backendNetwork
+      - frontendNetwork
+
+  coppeldatabase:
+    image: mysql
+    container_name: coppel-test-database
+    environment:
+      MYSQL_ROOT_PASSWORD: ''
+      MYSQL_DATABASE: coppeltest
+    ports:
+      - 3001:3306
+    volumes:
+     - dockerAngularSpringDatabaseData:/var/lib/mysql
+    networks:
+     - backendNetwork
+     
+volumes:
+  dockerAngularSpringDatabaseData:
+  
+networks:
+  backendNetwork:
+  frontendNetwork:
